@@ -32,7 +32,7 @@ const Home = () => {
   }, [query]);
 
   if (loading) {
-    return <div> Loading...</div>;
+    return <div className="lds-hourglass"></div>;
   }
 
   return (
@@ -40,15 +40,26 @@ const Home = () => {
       <input
         type="text"
         value={query}
+        placeholder="Search for news..."
         onChange={(e) => inputHandler(e.target.value)}
       />
 
-      <div>
+      <div className="hacker-search">
         {news.map((element) => {
-          const { title, objectID } = element;
+          const { title, objectID, points, num_comments } = element;
           return (
-            <Link to={`/news/${objectID}`}>
-              <p> {title} </p>
+            <Link
+              to={`/news/${objectID}`}
+              className="links"
+              style={{ textDecoration: "none" }}
+            >
+              <div className="search-item">
+                <div className="title">{title}</div>
+                <div className="info">
+                  <div className="author">{points} points</div>
+                  <div className="num-comments">{num_comments} comments</div>
+                </div>
+              </div>
             </Link>
           );
         })}

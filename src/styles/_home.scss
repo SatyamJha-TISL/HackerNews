@@ -1,0 +1,56 @@
+input {
+    padding: 10px;
+    padding-top: none!important;
+    border: none;
+    background: white;
+  
+}
+
+
+input:focus{
+  outline: none;
+  border: none;
+}
+
+
+.hacker-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  .search-item {
+    width: 300px;
+    height: 120px;
+    margin: 10px;
+    padding-top: 20px;
+    border-radius: 10px;
+    background-color: #353744;
+    color: white;
+    box-shadow: 0 2px 2px #727dc5;
+    .info{
+      display: flex;
+      padding:10px ;
+      color: #a5a5ac;
+      font-size: 15px;
+      .author {
+       
+        font-weight: 300;
+        color: #a5a5ac;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+  
+    }
+    .title{
+      text-align: left;
+      padding-left: 20px;
+      text-overflow: hidden;
+    
+    }
+  }
+  .search-item:hover {
+    transform: translate3d(5px, -5px, 0px);
+    transition: transform 0.2s ease-in-out;
+  }
+}
