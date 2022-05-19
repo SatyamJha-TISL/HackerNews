@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NewsDetail = () => {
   const { newsID } = useParams();
@@ -16,16 +17,13 @@ const NewsDetail = () => {
 
   const fetchData = async () => {
     const resp = await axios.get(API_NEW);
-    console.log(resp.data);
-    const { id, title, points, children } = resp.data;
-
+    const { title, points, children } = resp.data;
     const comments = children.map((child) => {
       const string = child.text;
-
       return string;
     });
-    const array = [title, points];
 
+    const array = [title, points];
     setData(array);
     setComment(comments);
   };
@@ -35,13 +33,18 @@ const NewsDetail = () => {
   }, [newsID]);
 
   return (
-    <div>
-      <div className="comment-container">
-        {data.map((details) => {
-          return <div className="comment">{details}</div>;
-        })}
+    <div className="comment-info">
+      <div className="first-container">
+        <Link to="/" className="link-home" style={{ textDecoration: "none" }}>
+          Home
+        </Link>
+        <div className="details">
+          {data.map((details) => {
+            return <div className="info-details">{details}</div>;
+          })}
+        </div>
       </div>
-      <div>
+      <div className="comment-wrapper">
         <h2> Comments </h2>
         <div className="comment-container">
           {comment.map((details) => {
@@ -53,8 +56,6 @@ const NewsDetail = () => {
           })}
         </div>
       </div>
-
-      <Link to="/">Back to Home</Link>
     </div>
   );
 };

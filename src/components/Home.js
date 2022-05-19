@@ -5,13 +5,11 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [query, setQuery] = useState("a");
   const [news, setNews] = useState([]);
-  const [error, setError] = useState({ show: false, msg: "hy" });
   const [loading, setLoading] = useState(true);
 
   const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
   const inputHandler = (valueofinput) => {
     setQuery(valueofinput);
-    console.log(query);
   };
 
   const fetchHandler = async (url) => {
@@ -19,7 +17,6 @@ const Home = () => {
     try {
       const result = await fetch(url);
       const data = await result.json();
-      console.log(data);
       setLoading(false);
       setNews(data.hits);
     } catch (error) {
