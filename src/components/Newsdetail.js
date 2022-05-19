@@ -5,7 +5,14 @@ import axios from "axios";
 const NewsDetail = () => {
   const { newsID } = useParams();
   const [data, setData] = useState([]);
+  const [comment, setComment] = useState([]);
   const API_NEW = `https://hn.algolia.com/api/v1/items/${newsID}`;
+
+  function parseHTML(html) {
+    var t = document.createElement("template");
+    t.innerHTML = html;
+    return t.content;
+  }
 
   const fetchData = async () => {
     const resp = await axios.get(API_NEW);
@@ -17,9 +24,10 @@ const NewsDetail = () => {
 
       return string;
     });
-    const array = [title, points, comments];
+    const array = [title, points];
 
     setData(array);
+    setComment(comments);
   };
   useEffect(() => {
     fetchData();
@@ -28,13 +36,23 @@ const NewsDetail = () => {
 
   return (
     <div>
-      <div> {newsID}</div>
-
-      <ul className="comment-container">
+      <div className="comment-container">
         {data.map((details) => {
-          return <li className="comment">{details}</li>;
+          return <div className="comment">{details}</div>;
         })}
-      </ul>
+      </div>
+      <div>
+        <h2> Comments </h2>
+        <div className="comment-container">
+          {comment.map((details) => {
+            const documentFragment = parseHTML(details);
+
+            return (
+              <div className="comment">{documentFragment.textContent}</div>
+            );
+          })}
+        </div>
+      </div>
 
       <Link to="/">Back to Home</Link>
     </div>
