@@ -19,6 +19,30 @@
       href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap"
       rel="stylesheet"
     />
+
+// SEMGREP FIX: html.security.audit.missing-integrity.missing-integrity
+// Issue: This tag is missing an 'integrity' subresource integrity attribute. The 'integrity' attribute allows for the browser to verify that externally hosted files (for example from a CDN) are delivered without unexpected manipulation. Without this attribute, if an attacker can modify the externally hosted resource, this could lead to XSS and other types of attacks. To prevent this, include the base64-encoded cryptographic hash of the resource (file) you’re telling the browser to fetch in the 'integrity' attribute for all externally hosted files.
+// Location: Line 22, Column 5
+// LLM Confidence: high
+// Reasoning: Integrity attributes allow browsers to verify that external resources haven't been tampered with, preventing supply chain attacks.
+// LLM Determined Fix Type: RESOURCE_INTEGRITY
+
+<!-- FIX_TYPE: RESOURCE_INTEGRITY -->
+<!-- SECURITY FIX: Add integrity attribute to external resources -->
+<!-- This prevents tampering with externally hosted files -->
+<!-- Always include integrity hashes for external resources -->
+
+<!-- Example fix for external CSS/JS: -->
+<!-- <link rel="stylesheet" href="https://cdn.example.com/style.css" -->
+<!--      integrity="sha384-[hash-here]" crossorigin="anonymous"> -->
+<!-- <script src="https://cdn.example.com/script.js" -->
+<!--         integrity="sha384-[hash-here]" crossorigin="anonymous"></script> -->
+
+<!-- To generate integrity hash: -->
+<!-- curl -s https://cdn.example.com/style.css | openssl dgst -sha384 -binary | openssl base64 -A -->
+
+// End of Semgrep Fix
+
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
