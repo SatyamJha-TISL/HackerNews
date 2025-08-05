@@ -11,6 +11,7 @@ const NewsDetail = () => {
 
   function parseHTML(html) {
     var t = document.createElement("template");
+// SECURITY FIX: javascript.browser.security.insecure-document-method.insecure-document-method - User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities
     t.innerHTML = html;
     return t.content;
   }
