@@ -11,7 +11,14 @@ const NewsDetail = () => {
 
   function parseHTML(html) {
     var t = document.createElement("template");
-    t.innerHTML = html;
+    import DOMPurify from 'dompurify'; // Add this import at the top of your file
+
+    function parseHTML(html) {
+      var t = document.createElement("template");
+      // Sanitize the HTML to prevent XSS
+      t.innerHTML = DOMPurify.sanitize(html);
+      return t.content;
+    }
     return t.content;
   }
 
