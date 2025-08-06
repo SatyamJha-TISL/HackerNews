@@ -19,6 +19,20 @@
       href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap"
       rel="stylesheet"
     />
+
+// SEMGREP FIX: html.security.audit.missing-integrity.missing-integrity
+// Issue: This tag is missing an 'integrity' subresource integrity attribute. The 'integrity' attribute allows for the browser to verify that externally hosted files (for example from a CDN) are delivered without unexpected manipulation. Without this attribute, if an attacker can modify the externally hosted resource, this could lead to XSS and other types of attacks. To prevent this, include the base64-encoded cryptographic hash of the resource (file) you’re telling the browser to fetch in the 'integrity' attribute for all externally hosted files.
+// Location: Line 22, Column 5
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+      crossorigin="anonymous"
+      integrity="sha384-Pv7xvJpPwuK5vjsVRqkCcZX6rM6eKbNSOJf+lusJNT2mAnQ82EUTySghlvdQi6Mw"
+    />
+
+// End of Semgrep Fix
+
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
